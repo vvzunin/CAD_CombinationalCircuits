@@ -603,29 +603,29 @@ OrientedGraph SimpleGenerators::generatorDecoder(int bits)
     {
         for (int p = 0; p <= k - 1; p++)
         {
-            S[p] = Convert.ToString(p);
+            S.insert(S.begin()+p, std::to_string(p));
             graph.addVertex("a" + S[p], "input");
             graph.addVertex("not a" + S[p], "not", "not a" + S[p]);
         }
 
         for (int i = 0; i <= bits - 1; i++)
         {
-            Z[i] = Convert.ToString(i);
+            Z.insert(Z.begin() + i, std::to_string(i));
             graph.addVertex("x" + Z[i], "output");
             F[i] = Convert.ToString(i, 2);
-            int len = F[i].Length;
+            int len = F[i].length();
 
             for (int w = 0; w <= k - 1; w++)
             {
-                if (F[i].Length < w + 1)
+                if (F[i].length() < w + 1)
                     X[i] = Convert.ToString(K[i] + " and not a" + S[w]);
                 else
                 {
-                    String u = F[i].Substring(len - w - 1, 1);
-                    if (u.Equals("1"))
-                        X[i] = Convert.ToString(K[i] + " and a" + S[w]);
+                    std::string u = F[i].substr(len - w - 1, 1);
+                    if (u.compare("1"))
+                        X.insert(X.begin() + i, (K[i] + " and a" + S[w]));
                     else
-                        X[i] = Convert.ToString(K[i] + " and not a" + S[w]);
+                        X.insert(X.begin() + i, (K[i] + " and not a" + S[w]));
                 }
                 K[i] = X[i];
                 X[i] = "";
@@ -634,16 +634,16 @@ OrientedGraph SimpleGenerators::generatorDecoder(int bits)
 
         for (int i = 0; i <= bits - 1; i++)
         {
-            if (!(String.IsNullOrEmpty(K[i])))
-                K[i] = K[i].Remove(0, 4);
+            if (!(K[i].empty() || K[i] == ""))
+                K[i] = K[i].erase(0, 4);
             graph.addVertex(K[i], "and", K[i]);
         }
 
         for (int i = 0; i <= bits - 1; i++)
         {
-            int len = F[i].Length;
+            int len = F[i].length();
             for (int w = 0; w <= k - 1; w++)
-                if (F[i].Length < w + 1)
+                if (F[i].length() < w + 1)
                 {
                     graph.addEdge(" a" + S[w], "not a" + S[w], false);
                     graph.addEdge("not a" + S[w], "x" + Z[i], false);
@@ -651,8 +651,8 @@ OrientedGraph SimpleGenerators::generatorDecoder(int bits)
                 }
                 else
                 {
-                    String u = F[i].Substring(len - w - 1, 1);
-                    if (u.Equals("1"))
+                    std::string u = F[i].substr(len - w - 1, 1);
+                    if (u.compare("1"))
                     {
                         graph.addEdge("a" + S[w], "x" + Z[i], false);
                         graph.addEdge("a" + S[w], K[i], false);
