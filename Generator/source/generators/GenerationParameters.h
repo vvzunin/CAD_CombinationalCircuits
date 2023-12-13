@@ -101,6 +101,12 @@ class GeneratorComparisonParameters
     bool compare2 = false;
 };
 
+class GeneratorDecoderParameters
+{
+public:
+
+};
+
 class GenerationParameters
 {
 public:

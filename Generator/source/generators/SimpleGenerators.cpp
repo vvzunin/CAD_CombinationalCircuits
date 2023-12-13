@@ -579,3 +579,94 @@ OrientedGraph SimpleGenerators::generatorСomparison(int bits, bool compare0, bo
     }
     return graph;
 }
+
+OrientedGraph SimpleGenerators::generatorDecoder(int bits)
+{
+    OrientedGraph graph;
+    int k = 0;
+    for (int t = 0; t <= bits; t++)
+        if (bits - 1 >= pow(2, t))
+        {
+            k = k + 1;
+        }
+    std::vector <std::string> F;
+    F.push_back(std::to_string(bits));
+    std::vector <std::string> X;
+    X.push_back(std::to_string(bits));
+    std::vector <std::string> K;
+    K.push_back(std::to_string(bits));
+    std::vector <std::string> S;
+    S.push_back(std::to_string(k));
+    std::vector <std::string> Z;
+    Z.push_back(std::to_string(bits));
+    if (bits > 1)
+    {
+        for (int p = 0; p <= k - 1; p++)
+        {
+            S[p] = Convert.ToString(p);
+            graph.addVertex("a" + S[p], "input");
+            graph.addVertex("not a" + S[p], "not", "not a" + S[p]);
+        }
+
+        for (int i = 0; i <= bits - 1; i++)
+        {
+            Z[i] = Convert.ToString(i);
+            graph.addVertex("x" + Z[i], "output");
+            F[i] = Convert.ToString(i, 2);
+            int len = F[i].Length;
+
+            for (int w = 0; w <= k - 1; w++)
+            {
+                if (F[i].Length < w + 1)
+                    X[i] = Convert.ToString(K[i] + " and not a" + S[w]);
+                else
+                {
+                    String u = F[i].Substring(len - w - 1, 1);
+                    if (u.Equals("1"))
+                        X[i] = Convert.ToString(K[i] + " and a" + S[w]);
+                    else
+                        X[i] = Convert.ToString(K[i] + " and not a" + S[w]);
+                }
+                K[i] = X[i];
+                X[i] = "";
+            }
+        }
+
+        for (int i = 0; i <= bits - 1; i++)
+        {
+            if (!(String.IsNullOrEmpty(K[i])))
+                K[i] = K[i].Remove(0, 4);
+            graph.addVertex(K[i], "and", K[i]);
+        }
+
+        for (int i = 0; i <= bits - 1; i++)
+        {
+            int len = F[i].Length;
+            for (int w = 0; w <= k - 1; w++)
+                if (F[i].Length < w + 1)
+                {
+                    graph.addEdge(" a" + S[w], "not a" + S[w], false);
+                    graph.addEdge("not a" + S[w], "x" + Z[i], false);
+                    graph.addEdge("not a" + S[w], K[i], false);
+                }
+                else
+                {
+                    String u = F[i].Substring(len - w - 1, 1);
+                    if (u.Equals("1"))
+                    {
+                        graph.addEdge("a" + S[w], "x" + Z[i], false);
+                        graph.addEdge("a" + S[w], K[i], false);
+                    }
+                    else
+                    {
+                        graph.addEdge(" a" + S[w], "not a" + S[w], false);
+                        graph.addEdge("not a" + S[w], "x" + Z[i], false);
+                        graph.addEdge("not a" + S[w], K[i], false);
+                    }
+                }
+        }
+    }
+    else Console.WriteLine("Недостаточно выходных сигналов");
+    return graph;
+}
+
