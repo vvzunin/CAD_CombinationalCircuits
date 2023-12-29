@@ -1,10 +1,10 @@
 [
   {
-    "dataset_id": "0",
-    "id": 0,
-    "type_of_generation": "Truth Table",
-    "min_in": 4,
-    "max_in": 5,
+    "dataset_id": "1",
+    "id": 2,
+    "type_of_generation": "Summator",
+    "min_in": 3,
+    "max_in": 4,
     "min_out": 4,
     "max_out": 5,
     "repeat_n": 2,
@@ -36,7 +36,11 @@
     "swap_type": 0,
     "ratio_in_table": 1.0,
     "selection_type": "Base",
-    "surv_num": 1    
+    "surv_num": 1,
+	"bits": 2,
+	"overflowIn": false,
+	"overflowOut": true,
+	"minus": false,
   }
 ]
  

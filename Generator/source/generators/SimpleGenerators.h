@@ -15,7 +15,7 @@ public:
     std::map<std::string, int> i_logicOper,
     bool i_leaveEmptyOut = true
   );
-  OrientedGraph generatorSummator(int bits, bool overflowIn, bool overflowOut, bool minus, bool act = false);
+  OrientedGraph generatorSummator(int i_bits, bool i_overflowIn, bool i_overflowOut, bool i_minus, bool act = false);
   OrientedGraph generatorСomparison(int bits, bool compare0, bool compare1, bool compare2, bool act = false);
   OrientedGraph generatorEncoder(int bits);
 private:

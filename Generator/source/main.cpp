@@ -68,6 +68,8 @@ void runGenerationFromJson(std::string json_path)
       gt = GenerationTypes::NumOperation;
     if (data["type_of_generation"] == "Genetic")
       gt = GenerationTypes::Genetic;
+    if (data["type_of_generation"] == "Summator")
+        gt = GenerationTypes::Summator;
 
     int requestIdINT = data["id"];
     std::string requestId = std::to_string(requestIdINT);
@@ -151,6 +153,10 @@ void runGenerationFromJson(std::string json_path)
 
     int survNum = data["surv_num"];
 
+    bool overflowIn = data["overflowIn"];
+    bool overflowOut = data["overflowOut"];
+    bool minus = data["minus"];
+
     std::map<std::string, int> m;
     std::vector<std::string> v =
         {"num_and", "num_nand", "num_or", "num_not",
@@ -173,6 +179,7 @@ void runGenerationFromJson(std::string json_path)
     gp.setCNFT(CNFT);
     //  gp.setLimit(limit);
     gp.setNumOperationParameters(m, LeaveEmptyOut);
+    gp.setSummatorParameters(inputs, overflowIn, overflowOut, minus);
     gp.setPopulationSize(populationSize);
     gp.setNumOfCycles(numOfCycles);
     gp.setRecombinationParameters(selecTypeParent, tourSize, recombType, refPoints, maskProb, recNum);

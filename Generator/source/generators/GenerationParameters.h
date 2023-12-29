@@ -88,9 +88,16 @@ private:
 
 class GeneratorSummatorParameters{
 public:
-    bool OverFlowIn = false;
-    bool OverFlowOut = false;
-    bool minus = false;
+    bool getOverFlowIn() {return d_OverFlowIn;}
+    bool getOverFlowOut() {return d_OverFlowOut;}
+    bool getMinus() {return d_minus;}
+    void setOverFlowIn(bool i_overflowIn) {d_OverFlowIn = i_overflowIn}
+    void setOverFlowOut(bool i_overflowOut) {d_OverFlowOut = i_overflowOut}
+    void setMinus(bool i_minus) {d_minus = i_minus}
+private:
+    bool d_OverFlowIn = false;
+    bool d_OverFlowOut = false;
+    bool d_minus = false;
 };
 
 class GeneratorComparisonParameters
@@ -188,6 +195,13 @@ public:
   {
 	d_generatorNumOperationParameters.setLogicOper(i_m);
   	d_generatorNumOperationParameters.setLeaveEmptyOut(i_LeaveEmptyOut);
+  }
+  void setSummatorParameters(int i_bits, bool i_overflowIn, bool i_overflowOut, bool i_minus)
+  {
+      d_generatorSummatorParameters.setInputs(i_bits);
+      d_generatorSummatorParameters.setOverFlowIn(i_overflowIn);
+      d_generatorSummatorParameters.setOverFlowOut(i_overflowOut);
+      d_generatorSummatorParameters.setMinus(i_minus);
   }
   void setNumOfCycles(int i_numOfCycles){ d_geneticParameters.setNumOfCycles(i_numOfCycles); }
   void setPopulationSize(int i_populationSize) { d_geneticParameters.setPopulationSize(i_populationSize); }

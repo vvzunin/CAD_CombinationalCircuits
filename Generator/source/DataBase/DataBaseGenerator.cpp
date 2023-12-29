@@ -174,11 +174,11 @@ void DataBaseGenerator::generateDataBaseGenetic(const GenerationParameters& i_pa
 
 void DataBaseGenerator::GenerateDataBaseSummator(GenerationParameters &i_param) {
     SimpleGenerators sg;
-    int bits = i_param.getInputs();
-    bool overflowIn = i_param.getSummator().OverFlowIn;
-    bool overflowOut = i_param.getSummator().OverFlowOut;
-    bool minus = i_param.getSummator().minus;
-    OrientedGraph graph = sg.generatorSummator(bits, overflowIn, overflowOut, minus);
+    int i_bits = i_param.getInputs();
+    bool i_overflowIn = i_param.getSummator().getOverFlowIn();
+    bool i_overflowOut = i_param.getSummator().getOverFlowOut();
+    bool i_minus = i_param.getSummator().getMinus();
+    OrientedGraph graph = sg.generatorSummator(i_bits, i_overflowIn, i_overflowOut, i_minus);
     Circuit c (graph);
     c.setPath(d_mainPath);
     c.setCircuitName(i_param.getName());

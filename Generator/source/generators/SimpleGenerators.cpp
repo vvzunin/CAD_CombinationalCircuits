@@ -328,10 +328,10 @@ std::string SimpleGenerators::randomGenerator(const std::map<std::string, int>& 
 
 }
 
-OrientedGraph SimpleGenerators::generatorSummator(int bits, bool overflowIn, bool overflowOut, bool minus, bool act)
+OrientedGraph SimpleGenerators::generatorSummator(int i_bits, bool i_overflowIn, bool i_overflowOut, bool i_minus, bool act)
 {
     OrientedGraph graph;
-    if (overflowIn)
+    if (i_overflowIn)
         graph.addVertex("p0", "input");
     if (act)
         graph.addVertex("1", "const");
@@ -339,15 +339,15 @@ OrientedGraph SimpleGenerators::generatorSummator(int bits, bool overflowIn, boo
     std::string x;
     std::string y;
     std::string z;
-    std::string cond = std::string(overflowIn ? "t" : "f") + (overflowOut ? "t" : "f") + (minus ? "t" : "f");
-    z = std::string(minus ? "n" : "") + "s" + (!overflowIn && !overflowOut ? "0" : (!overflowIn && overflowOut ? "1" : (overflowIn && !overflowOut ? "2" : "3")));
-    for (int i = 0; i < bits; i++){
+    std::string cond = std::string(i_overflowIn ? "t" : "f") + (i_overflowOut ? "t" : "f") + (i_minus ? "t" : "f");
+    z = std::string(i_minus ? "n" : "") + "s" + (!i_overflowIn && !i_overflowOut ? "0" : (!i_overflowIn && i_overflowOut ? "1" : (i_overflowIn && !i_overflowOut ? "2" : "3")));
+    for (int i = 0; i < i_bits; i++){
         std::string S = std::to_string(i);
         x = "suma" + cond + S;
         y = "sumb" + cond + S;
         graph.addVertex(x, "input");
         graph.addVertex(y, "input");
-        if (minus)
+        if (i_minus)
         {
             graph.addVertex("not (" + x + ")", "not", "na" + S);
             graph.addVertex("not (" + y + ")", "not", "nb" + S);
@@ -376,7 +376,7 @@ OrientedGraph SimpleGenerators::generatorSummator(int bits, bool overflowIn, boo
         graph.addEdge("andab" + S, "p" + NextS, false);
         graph.addEdge("anda" + pi, "p" + NextS, false);
         graph.addEdge("andb" + pi, "p" + NextS, false);
-        if (overflowOut && i + 1 == bits)
+        if (i_overflowOut && i + 1 == i_bits)
         {
             if (act)
             {
@@ -385,8 +385,8 @@ OrientedGraph SimpleGenerators::generatorSummator(int bits, bool overflowIn, boo
             }
             else
             {
-                graph.addVertex(z + std::to_string(bits), "output");
-                graph.addEdge("p" + NextS, z + std::to_string(bits), false);
+                graph.addVertex(z + std::to_string(i_bits), "output");
+                graph.addEdge("p" + NextS, z + std::to_string(i_bits), false);
             }
         }
         graph.addVertex("not (p" + NextS + ")", "not", "np" + NextS);
