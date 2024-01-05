@@ -19,6 +19,6 @@ package-lock.json
 jsons_for_generator/*
 launch.json
 settings.json
-.vscode
+.vscode/
 result_dataset/
 */*/.vscode
