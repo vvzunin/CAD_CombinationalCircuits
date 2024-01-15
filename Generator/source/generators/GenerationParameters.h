@@ -180,6 +180,7 @@ public:
   GeneratorNumOperationParameters getNumOperations() const { return d_generatorNumOperationParameters; }
   GeneratorSummatorParameters getSummator() const {return d_generatorSummatorParameters; }
   GeneratorComparisonParameters getComparison() const {return d_generatorComparisonParameters; }
+  GeneratorDecoderParameters getDecoder() const {return d_generatorDecoderParameters; }
   GeneticParameters getGenetic() const { return d_geneticParameters; }
   void setCNFF(bool i_CNFF){ d_cnfFromTruthTableParameters.setCNFF(i_CNFF); }
   void setCNFT(bool i_CNFT){ d_cnfFromTruthTableParameters.setCNFT(i_CNFT); }
@@ -207,5 +208,6 @@ private:
   GeneratorNumOperationParameters d_generatorNumOperationParameters;
   GeneratorSummatorParameters d_generatorSummatorParameters;
   GeneratorComparisonParameters d_generatorComparisonParameters;
+  GeneratorDecoderParameters d_generatorDecoderParameters;
   GeneticParameters d_geneticParameters = GeneticParameters(2, 3);
 };

@@ -181,6 +181,8 @@ std::string Settings::getGenerationMethodPrefix(const std::string& i_s) const
     return "CCGRCG";
   if (i_s == "NumOperation")
     return "CCGRVC";
+  if (i_s == "Decoder")
+    return "CCGDCR";
   if (i_s == "Genetic")
     return "CCGGA";
 

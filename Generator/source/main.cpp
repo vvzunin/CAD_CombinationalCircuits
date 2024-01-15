@@ -66,6 +66,8 @@ void runGenerationFromJson(std::string json_path)
       gt = GenerationTypes::RandLevel;
     if (data["type_of_generation"] == "Num Operation")
       gt = GenerationTypes::NumOperation;
+    if (data["type_of_generation"] == "Decoder")
+      gt = GenerationTypes::Decoder;
     if (data["type_of_generation"] == "Genetic")
       gt = GenerationTypes::Genetic;
 

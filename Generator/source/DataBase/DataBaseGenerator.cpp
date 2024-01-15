@@ -211,6 +211,18 @@ void DataBaseGenerator::GenerateDataBaseComparison(const GenerationParameters &i
 
 }
 
+void DataBaseGenerator::GenerateDataBaseEncoder(const GenerationParameters &i_param)
+{
+  SimpleGenerators sg;
+  int bits = i_param.getInputs();
+  OrientedGraph graph = sg.generatorDecoder(bits);
+  Circuit c(graph);
+  c.setPath(d_mainPath);
+  c.setCircuitName(i_param.getName());
+  c.generate();
+
+}
+
 std::function<void(const GenerationParameters&)> DataBaseGenerator::getGenerateMethod(const std::string& i_methodName)
 {
   if (i_methodName == "FromRandomTruthTable")
@@ -219,6 +231,8 @@ std::function<void(const GenerationParameters&)> DataBaseGenerator::getGenerateM
     return std::bind(&DataBaseGenerator::generateDataBaseRandLevel, this, std::placeholders::_1);
   if (i_methodName == "NumOperation")
     return std::bind(&DataBaseGenerator::generateDataBaseNumOperations, this, std::placeholders::_1);
+  if (i_methodName == "Decoder")
+    return std::bind(&DataBaseGenerator::GenerateDataBaseDecoder, this, std::placeholders::_1);
   if (i_methodName == "Genetic")
     return std::bind(&DataBaseGenerator::generateDataBaseGenetic, this, std::placeholders::_1);
   
