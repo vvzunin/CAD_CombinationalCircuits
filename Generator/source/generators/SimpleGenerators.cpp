@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <ctime>
 #include <iostream>
-#include <math.h>
 
 #include "SimpleGenerators.h"
 #include "../graph/OrientedGraph.h"
@@ -200,11 +199,6 @@ OrientedGraph SimpleGenerators::generatorNumOperation(
   std::string name;
   std::map<std::string, int> copyLogicOper, levelName;
   std::vector<std::string> nameOut, nameInput;
-
-  for(const auto& elem : i_logicOper)
-  {
-    std::cout << elem.first << " " << elem.second << "\n";
-  }
 
   copyLogicOper = i_logicOper;
   
@@ -586,56 +580,93 @@ OrientedGraph SimpleGenerators::generatorСomparison(int bits, bool compare0, bo
     return graph;
 }
 
- OrientedGraph SimpleGenerators::generatorEncoder(int bits)
+OrientedGraph SimpleGenerators::generatorDecoder(int bits)
 {
-    OrientedGraph graph ;
+    OrientedGraph graph;
     int k = 0;
     for (int t = 0; t <= bits; t++)
         if (bits - 1 >= pow(2, t))
         {
             k = k + 1;
         }
-    for (int l = 0; l <= bits - 1; l++)
-    {
-        std::string Z = std::to_string(l);
-        graph.addVertex("x" + Z, "input");
-    }
+    std::vector <std::string> F;
+    F.push_back(std::to_string(bits));
+    std::vector <std::string> X;
+    X.push_back(std::to_string(bits));
+    std::vector <std::string> K;
+    K.push_back(std::to_string(bits));
+    std::vector <std::string> S;
+    S.push_back(std::to_string(k));
+    std::vector <std::string> Z;
+    Z.push_back(std::to_string(bits));
     if (bits > 1)
-        for (int p = k - 1; p >= 0; p--)
+    {
+        for (int p = 0; p <= k - 1; p++)
         {
-            std::string L = "";
-            std::string P = "";
-            std::string M = "";
-            std::string K = "";
-            std::string S = std::to_string(p);
-            graph.addVertex("a" + S, "output");
-
-            for (int i = 0; i <= bits - 1; i++)
-                for (double t = pow(2, p); t <= pow(2, p + 1) - 1; t++)
-                    if (pow(2, p + 1) * i + t <= bits - 1)
-                    {
-                        std::string R = std::to_string(pow(2, p + 1) * i + t);
-                        K = M + " or x" + R;
-                        L = P + "orx" + R;
-                        //graph.addEdge("x" + R, "a" + S, false);
-                        P = L;
-                        L = "";
-                        M = K;
-                        K = "";
-                    }
-            M = M.erase(0, 3);
-            graph.addVertex(M, "or", P);
-            for (int i = 0; i <= bits - 1; i++)
-                for (double t = pow(2, p); t <= pow(2, p + 1) - 1; t++)
-                    if (pow(2, p + 1) * i + t <= bits - 1)
-                    {
-                        std::string R = std::to_string(pow(2, p + 1) * i + t);
-                        graph.addEdge("x" + R, P, false);
-                    }
-            graph.addEdge(P, "a" + S, false);
+            S.insert(S.begin()+p, std::to_string(p));
+            graph.addVertex("a" + S[p], "input");
+            graph.addVertex("not a" + S[p], "not", "not a" + S[p]);
         }
-    else
-       std::cout << "Недостаточно входных сигналов\n";
 
+        for (int i = 0; i <= bits - 1; i++)
+        {
+            Z.insert(Z.begin() + i, std::to_string(i));
+            graph.addVertex("x" + Z[i], "output");
+            F[i] = Convert.ToString(i, 2);
+            int len = F[i].length();
+
+            for (int w = 0; w <= k - 1; w++)
+            {
+                if (F[i].length() < w + 1)
+                    X[i] = Convert.ToString(K[i] + " and not a" + S[w]);
+                else
+                {
+                    std::string u = F[i].substr(len - w - 1, 1);
+                    if (u.compare("1"))
+                        X.insert(X.begin() + i, (K[i] + " and a" + S[w]));
+                    else
+                        X.insert(X.begin() + i, (K[i] + " and not a" + S[w]));
+                }
+                K[i] = X[i];
+                X[i] = "";
+            }
+        }
+
+        for (int i = 0; i <= bits - 1; i++)
+        {
+            if (!(K[i].empty() || K[i] == ""))
+                K[i] = K[i].erase(0, 4);
+            graph.addVertex(K[i], "and", K[i]);
+        }
+
+        for (int i = 0; i <= bits - 1; i++)
+        {
+            int len = F[i].length();
+            for (int w = 0; w <= k - 1; w++)
+                if (F[i].length() < w + 1)
+                {
+                    graph.addEdge(" a" + S[w], "not a" + S[w], false);
+                    graph.addEdge("not a" + S[w], "x" + Z[i], false);
+                    graph.addEdge("not a" + S[w], K[i], false);
+                }
+                else
+                {
+                    std::string u = F[i].substr(len - w - 1, 1);
+                    if (u.compare("1"))
+                    {
+                        graph.addEdge("a" + S[w], "x" + Z[i], false);
+                        graph.addEdge("a" + S[w], K[i], false);
+                    }
+                    else
+                    {
+                        graph.addEdge(" a" + S[w], "not a" + S[w], false);
+                        graph.addEdge("not a" + S[w], "x" + Z[i], false);
+                        graph.addEdge("not a" + S[w], K[i], false);
+                    }
+                }
+        }
+    }
+    else Console.WriteLine("Недостаточно выходных сигналов");
     return graph;
 }
+
