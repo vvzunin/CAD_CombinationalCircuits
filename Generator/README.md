@@ -11,7 +11,7 @@
 Сборка и запуск производятся из операционной системы Linux.
 
 Программа запускалась на Ubuntu 22.04 с использованием WSL (Windows Subsystem for Linux).
-Руководство разработчикаа доступно по [ссылке](https://drive.google.com/file/d/1eKWMpF0Ig5r5ZI81dJjRoibctzezNE-D/view?usp=sharing).
+Руководство разработчика доступно по [ссылке](https://drive.google.com/file/d/1eKWMpF0Ig5r5ZI81dJjRoibctzezNE-D/view?usp=sharing).
 
 ## Правила именования переменных
 <a name="rules_rus"></a> 
