@@ -6,4 +6,4 @@ cd build
 cmake ..
 make -j 10
 cd $currentDir/Generator/source/build/tests
-./tests
+./tests --gtest_output="xml:report.xml"
