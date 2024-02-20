@@ -3,11 +3,12 @@
 #include <generators/GenerationParameters.h>
 #include <settings/Settings.h>
 
+
 enum GenerationTypes
 {
     FromRandomTruthTable,
     RandLevel,
-    NumOperation,
+    NumOperation, 
     Genetic,
     Summator,
     Comparison,

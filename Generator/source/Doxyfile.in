@@ -1,0 +1,4 @@
+PROJECT_NAME           = "CombinationalCircuits"
+PROJECT_NUMBER         = "1.0"
+INPUT                  = /Generator/docs
+OUTPUT_DIRECTORY       = /Generator/source

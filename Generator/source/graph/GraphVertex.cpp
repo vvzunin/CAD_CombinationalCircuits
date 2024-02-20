@@ -1,6 +1,7 @@
 #include <string>
 
 #include "GraphVertex.h"
+
 // TODO why here are two variables
 int GraphVertex::d_count = 0;
 GraphVertex::GraphVertex(const std::string& i_expr,

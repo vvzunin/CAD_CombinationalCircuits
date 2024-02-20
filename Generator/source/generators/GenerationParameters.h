@@ -6,6 +6,13 @@
 
 #include "./Genetic/GeneticParameters.h"
 
+
+/// class CNNFromTruthTableParameters
+/// @param d_generateLimitations It may refer to conditions or restrictions that can be applied to combinational logic, for example, imposing restrictions on input or output signals, or restrictions on the use of certain logical operations
+/// @param d_CNFF A Boolean value indicating whether the form of the normal conjunctive normal form (CNF) should be used to generate a combinational scheme.
+/// @param d_CNFT A Boolean value indicating whether to use the normal disjunctive normal form (DNF) to generate a combinational scheme
+///  */
+
 class CNNFromTruthTableParameters
 {
 public:
@@ -20,6 +27,12 @@ private:
     bool d_CNFF = false;
     bool d_CNFT = false;
 };
+
+/// class GeneratorRandLevelParameters
+/// @param d_maxLevel It can mean the maximum number of levels in the graph or structure that the level generator generates.
+/// @param d_maxElements It can mean the maximum number of logical elements or notes that can be created at each level of the graph structure
+/// */
+
 
 class GeneratorRandLevelParameters
 {
@@ -48,6 +61,11 @@ private:
     int d_maxLevel = 0;
     int d_maxElements = 0;
 };
+
+/// class GeneratorNumOperationParameters
+/// @param d_logicOper This is used to store information about logical operations that can be used to generate combinational circuits. Map <name_log_Op, key(value)>
+/// @param d_leaveEmptyOut A Boolean value indicating whether to leave an empty output node (for example, if it is not associated with any logical operation)
+/// */
 
 class GeneratorNumOperationParameters
 {
@@ -88,6 +106,12 @@ private:
     bool d_leaveEmptyOut = true;
 };
 
+/// GeneratorSummatorParameters
+/// @param OverFlowIn A Boolean value indicating whether overflow of input values is allowed. It relate to the behavior of the adder when the maximum value of the summed inputs is exceeded*
+/// @param OverFlowOut A Boolean value indicating whether overflow of the output value is allowed. The adder can generate an additional bit to handle overflow. Default - false
+/// @param minus In the context of combinational circuits, this may mean that the adder can work not only with the addition operation, but also with subtractions*
+/// */
+
 class GeneratorSummatorParameters
 {
 public:
@@ -95,6 +119,13 @@ public:
     bool OverFlowOut = false;
     bool minus = false;
 };
+
+/// class GeneratorComparisonParameters
+/// @param compare0 A Boolean value indicating whether a comparison with zero is enabled. In the context of combinational circuits, this may mean that the circuit must perform a comparison with a zero value.
+/// @param compare1 A Boolean value indicating whether a comparison with a unit is enabled. In the context of combinational circuits, this may mean that the circuit must perform a comparison with a single value
+/// @param compare2 A Boolean value indicating whether a comparison with two is enabled. In the context of combinational circuits, this may mean that the circuit must perform a comparison with a double value
+/// 
+/// */
 
 class GeneratorComparisonParameters
 {
@@ -104,9 +135,30 @@ public:
     bool compare2 = false;
 };
 
+/// class GeneratorEncoderParameters
+/// The existence of this class is unknown ???
+/// 
+/// */
+
 class GeneratorEncoderParameters
 {
 };
+
+/// class GenerationParameters
+/// @param d_name Generation name
+/// @param d_requestId request ID
+/// @param d_libraryName library name***
+/// @param d_inputs number of inputs
+/// @param d_outputs number of outputs
+/// @param d_iteration ???
+/// @param d_calculateStatsAbc A Boolean value indicating whether ABC statistics should be calculated
+/// @param d_makeOptimizedFiles A Boolean value indicating whether optimized files should be created
+/// @param d_makeFirrtl A Boolean value indicating whether FIRRTL files should be created
+/// @param d_makeBench A Boolean value indicating whether to create Bench files
+/// @param d_gatesInputsInfo A mapping where the key is a string representing information about the inputs, and the value is a vector of integers representing information about the inputs for the gates***
+/// 
+/// 
+/// */
 
 class GenerationParameters
 {

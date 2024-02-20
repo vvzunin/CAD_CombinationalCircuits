@@ -4,6 +4,18 @@
 #include "./Recombination/RecombinationParameters.h"
 #include "./Mutations/MutationParameters.h"
 
+/// class GeneticParameters
+/// @param d_inputs The number of input parameters for the genetic algorithm
+/// @param d_outputs The number of output parameters for the genetic algorithm
+/// @param d_populationSize The field that stores the selection parameters for the genetic algorithm
+/// @param d_recombinationParameters The field that stores the recombination parameters for the genetic algorithm
+/// @param d_mutationParameters The field that stores mutation parameters for the genetic algorithm
+/// @param d_populationSize The field that stores the population size for the genetic algorithm
+/// @param d_numOfCycles A field that stores the number of cycles of the genetic algorithm execution. This determines the number of iterations that the algorithm will perform before shutting down or returning a result.
+/// @param d_keyEndProcessIndex The field that stores the key end process index for the genetic algorithm
+/// 
+/// */
+
 class GeneticParameters
 {
 public:
@@ -36,6 +48,12 @@ protected:
   double d_keyEndProcessIndex = 0;
 };
 
+/// class OrientedGraphParameters
+/// @param d_maxLevel In the context of a Oriented Graph, the level can determine the depth or distance from the root node to the end node. This value can be used to control the depth of graph traversal algorithms or other operations.
+/// @param d_maxElements This field stores the maximum number of elements in a directed graph. This value can be used to limit the number of nodes or edges in the graph
+/// 
+/// */
+
 //TODO: is it really need to place it there and not in ../../graph/OrientedGraph.h?
 class OrientedGraphParameters : public GeneticParameters
 {
@@ -48,6 +66,7 @@ private:
   int d_maxLevel = 0;
   int d_maxElements = 0;
 };
+
 
 class TruthTableParameters : public GeneticParameters
 {

@@ -7,6 +7,15 @@
 #include "./Genetic/GeneticParameters.h"
 #include "./Genetic/Chronosome.h"
 
+/// class TruthTable
+/// @param d_input The number of input variables of the truth table.
+/// @param d_output The number of output variables (results) of the truth table
+/// @param d_size Size (number of rows) of the truth table
+/// @param d_array The vector of Boolean value vectors (std::vector<std::vector<bool>>), which is the truth table itself, where each internal vector represents one row of the truth table.
+/// @param d_settings A pointer to an object of the Settings class, which is a singleton and is used to store settings related to TruthTable.
+/// 
+/// </summary>
+
 class TruthTable : Chronosome<TruthTableParameters>
 {
 public:

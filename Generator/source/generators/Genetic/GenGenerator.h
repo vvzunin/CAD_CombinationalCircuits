@@ -24,6 +24,19 @@
 
 int getNumFolderFromString(const std::string& path);//Linker without this line throw error.
 
+
+/// class GeneticGenerator
+/// @param d_inputs A field that stores the number of input parameters for the genetic algorithm generator
+/// @param d_outputs A field that stores the number of output parameters for the genetic algorithm generator
+/// @param d_numCross The field that stores the number of crossovers in the genetic generator
+/// @param d_population The field that stores the population of chromosomes in the genetic generator. A population is a set of chromosomes that is used in the process of generating new objects
+/// @param d_settings The field that stores a pointer to the settings object for the genetic generator
+/// @param d_parameters The field that stores the parameters for the genetic generator
+/// @param d_mainPath The field that stores the main path for the genetic generator
+/// @param d_foldersCount The field that stores the number of folders for the genetic generator
+/// 
+/// */
+
 template<typename Type, typename ParametersType>
 class GeneticGenerator
 {

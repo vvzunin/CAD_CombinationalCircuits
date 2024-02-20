@@ -5,6 +5,13 @@
 
 #include <graph/OrientedGraph.h>
 
+/// class Parser
+/// @param d_logExpressions It can represent a set of logical expressions describing the logic of combinational schemes. These expressions can contain combinations of logical operations and variables. for example, A AND B, NOT, C XOR(A, Y)*
+/// @param d_graph An object of the Oriented Graph class, which is an oriented graph used to represent relationships between logical expressions.
+/// @param d_settings A pointer to an object of the Settings class, which is a singleton and is used to store settings related to the "Parser"
+/// 
+/// </summary>
+
 class Parser
 {
 public:

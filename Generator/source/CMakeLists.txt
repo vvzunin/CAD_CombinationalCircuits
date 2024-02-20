@@ -9,6 +9,28 @@ project(CircuitsGenerator
   LANGUAGES CXX
 )
 
+# Installing Doxygen
+find_package(Doxygen)
+
+if(DOXYGEN_FOUND)
+    # Конфигурация файла Doxyfile
+    set(DOXYGEN_INPUT ${\Generator\source}/src) # The path to the source files of your project
+    set(DOXYGEN_OUTPUT_DIRECTORY ${\Generator}/doc) # The path to save the documentation
+    set(DOXYGEN_GENERATE_HTML YES)
+    set(DOXYGEN_GENERATE_MAN NO)
+    set(DOXYGEN_EXTRACT_ALL YES)
+
+    # Генерация Doxyfile
+    configure_file(Doxyfile.in ${CMAKE_BINARY_DIR}/Doxyfile @ONLY)
+
+    # Создание цели сборки для генерации документации
+    add_custom_target(doc
+        ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Generating API documentation with Doxygen" VERBATIM
+    )
+endif()
+
 # Add path for .cmake files. Needed for "include" directive.
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 

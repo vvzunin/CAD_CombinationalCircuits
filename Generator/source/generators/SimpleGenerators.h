@@ -7,6 +7,12 @@
 #include <graph/OrientedGraph.h>
 #include "./TruthTable.h"
 
+/// class SimpleGenerators
+/// @param d_settings A pointer to an object of the Settings class, which is a singleton and is used to store settings associated with the vertices of the graph.
+/// @param d_gatesInputsInfo The data structure represented as a display (std::map<std::string, std::vector<int>>), where the keys are strings (names of logical operations), and the values are vectors of integers representing information about the inputs (indexes) of gates associated with each logical operation. This is a general description***
+/// 
+/// </summary>
+
 class SimpleGenerators
 {
 public:

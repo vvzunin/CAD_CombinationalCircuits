@@ -5,6 +5,11 @@ enum SelectionTypes
   Base
 };
 
+/// class 
+/// @param d_selectionType This field represents the type of selection of individuals (selection type) in a combinational scheme, which can be interpreted as one of the various types of selection algorithms used in genetic algorithms or other optimization methods
+/// @param d_numOfSurvivors The number of input elements or states that pass through the circuit and remain "surviving" at the output
+/// 
+/// */
 
 class SelectionParameters
 {

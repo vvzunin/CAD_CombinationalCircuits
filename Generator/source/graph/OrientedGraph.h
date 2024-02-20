@@ -8,6 +8,22 @@
 #include "GraphVertex.h"
 #include <generators/Genetic/GeneticParameters.h>
 
+/// class OrientedGraph
+/// 
+/// @param d_listOfEdgesFromTo Stores a list of graph edges in the form of a two-dimensional vector, where each element of the vector is a list of vertices from which the edges originate to the corresponding vertex
+/// @param d_listOfEdgesToFrom Stores a list of graph edges in the form of a two-dimensional vector, where each element of the vector is a list of vertices that include edges from the corresponding vertex
+/// @param d_vertices Stores a list of graph vertices. This vector contains objects of the Graph Vertex class, each of which represents a vertex of a graph with certain properties and characteristics
+/// @param d_inputs Stores indexes of vertices that are inputs to the graph. This vector contains the indices of the vertices from the vector d_vertices, which represent the inputs of the graph
+/// @param d_outputs Stores indexes of vertices that are outputs for the graph. This vector contains the indices of the vertices from the vector d_vertices, which represent the outputs of the graph
+/// @param d_consts Stores the indexes of the vertices, which are constants for the graph. This vector contains the indices of the vertices from the vector d_vertices, which represent constants in the graph
+/// @param d_inputs_names Stores the names of the input vertices of the graph. This vector contains the names of the vertices corresponding to the vector d_inputs
+/// @param d_outputs_names Stores the names of the output vertices of the graph. This vector contains the names of the vertices corresponding to the vector d_outputs
+/// @param d_adjacencyMatrix Stores the adjacency matrix of the graph as a two-dimensional vector of Boolean values. This matrix represents information about the connections between the vertices of the graph: if an edge exists between the vertices, then the corresponding element of the matrix has the value true, otherwise false
+/// @param d_error Stores error information in a graph as an associative container std::map. The key is the name of the vertex, and the value is a Boolean value representing the presence or absence of an error in this vertex
+/// @param d_settings A pointer to the settings object for the graph. This pointer can be used to get or set graph-related settings
+/// 
+/// */
+
 class OrientedGraph
 {
 public:

@@ -6,17 +6,43 @@
 #include <utility>
 #include <vector>
 
+
 enum generationTypes
 {
     none,
     truthTableToGraphWithoutOptimization,
-    truthTableToGraphWithOptimization
+    truthTableToGraphWithOptimization  
 };
 
 enum LibrariesTypes
 {
     SKY_LIB
 };
+
+
+/// class Settings
+/// 
+/// This is the detailed one. More details. Private...
+/// @param d_name This is a string field for storing the name of the settings 
+/// @param d_singleton Singleton ensures that only one instance of the class exists in the application
+/// @param d_path The path to the settings file
+/// @param d_csvdataset Contains the name of the CSV file for the dataset. By default, "dataset.csv"
+/// @param d_fileName The name of the settings file. The default value is "settings.dat"
+/// @param d_datasetPath This is a string field containing the path to the directory with the dataset. The default value is "./dataset"
+/// @param d_libraryPath This is a string field that contains the path to the library directory. The default value is set to "Generator/libs"
+/// @param d_pathToNadezhda This is a string field that contains the path to the directory with Nadezhda data. The default value is set to "./Generator/source/data/Nadezhda". However, this path is not in the project*
+/// @param d_nadezhda ???
+/// @param d_numThreads The number of threads that are used in the application. The default value is 4
+/// @param d_logicOperations This is an associative std::map container that maps strings (keys) into pairs of strings and integers. It is used to store logical operations and their associated parameters, such as the symbolic representation of the operation and its priority
+/// @param d_operationsToHierarchy This is an associative std::map container that maps integers to string vectors. It is used to store a hierarchy of logical operations
+/// @param d_operationsToName It is used to match symbolic representations of logical operations and their names.
+/// @param d_maxInputs The maximum number of inputs. The default value is 50
+/// @param d_maxOutputs The maximum number of outputs. The default value is 50
+/// 
+///
+
+
+
 
 class Settings
 {
