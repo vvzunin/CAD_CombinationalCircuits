@@ -117,7 +117,8 @@ int Circuit::calculateReliability(int inputs_size)
             for (int n : vec_2)
             {
                 std::vector<int> tmp_2 = d_graph->d_listOfEdgesToFrom[n];
-                std::vector<bool> vec_3(tmp_2.size());
+                std::vector<bool> vec_3;
+                vec_3.reserve(tmp_2.size());
 
                 for (int j : tmp_2)
                 {
@@ -130,7 +131,9 @@ int Circuit::calculateReliability(int inputs_size)
         }
 
         std::vector<int> vec_outputs_indices_without_error = d_graph->getVertices("output");
-        std::vector<bool> result_without_error(vec_outputs_indices_without_error.size());
+        std::vector<bool> result_without_error;
+        result_without_error.reserve(vec_outputs_indices_without_error.size());
+
         for (int j : vec_outputs_indices_without_error)
         {
             bool cur_value = d_graph->d_vertices[(d_graph->d_listOfEdgesToFrom[j])[0]].getValue();
@@ -152,8 +155,9 @@ for (int j = 0; j < d_graph->d_vertices.size(); j++)
         }
 }*/
 
-        std::vector<int> indecies__(
-            d_graph->d_vertices.size() - d_graph->d_inputs.size() - d_graph->d_outputs.size() - d_graph->d_consts.size());
+        std::vector<int> indecies__;
+        indecies__.reserve(
+            d_graph->d_vertices.size() - (d_graph->d_inputs.size() + d_graph->d_outputs.size() + d_graph->d_consts.size()));
 
         for (auto j = 0; j < d_graph->d_vertices.size(); j++)
         {
@@ -182,7 +186,9 @@ for (int j = 0; j < d_graph->d_vertices.size(); j++)
             for (int n : vec_2)
             {
                 std::vector<int> tmp_2 = d_graph->d_listOfEdgesToFrom[n];
-                std::vector<bool> vec_3(tmp_2.size());
+                std::vector<bool> vec_3;
+                vec_3.reserve(tmp_2.size());
+
                 for (int j : tmp_2)
                 {
                     vec_3.push_back(d_graph->d_vertices[j].getValue());
@@ -193,7 +199,9 @@ for (int j = 0; j < d_graph->d_vertices.size(); j++)
         }
 
         std::vector<int> vec_outputs_indices_with_error = d_graph->getVertices("output");
-        std::vector<bool> result_with_error(vec_outputs_indices_with_error.size());
+        std::vector<bool> result_with_error;
+        result_with_error.reserve(vec_outputs_indices_with_error.size());
+
         for (int j : vec_outputs_indices_with_error)
         {
             bool cur_value = d_graph->d_vertices[(d_graph->d_listOfEdgesToFrom[j])[0]].getValue();
@@ -255,7 +263,8 @@ void Circuit::updateCircuitsParameters(bool i_getAbcStats, std::string i_library
     // Reliability R(d_graph, 0.5);
     std::map<std::string, double> dict; // = R.runNadezhda(d_path, d_circuitName); // what? d_path
 
-    if (inputs.size() <= 15)
+    if (inputs.size() <= 15 &&
+        d_graph->d_vertices.size() - (d_graph->d_inputs.size() + d_graph->d_consts.size() + d_graph->d_outputs.size()) > 0)
         d_circuitParameters.d_reliability = 1 - calculateReliability(inputs.size()) / pow(2.0, float(inputs.size()));
     else
         d_circuitParameters.d_reliability = 1;
@@ -690,7 +699,7 @@ bool Circuit::generate(bool i_makeFirrtl, bool i_makeBench, bool i_getAbcStats, 
         std::thread optimize1(
             saveOptimizationParameters,
             func);
-        
+
         func = AbcUtils::resyn2;
         std::thread optimize2(
             saveOptimizationParameters,
