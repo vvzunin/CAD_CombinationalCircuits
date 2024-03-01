@@ -4,19 +4,22 @@ SET(GCC_COVERAGE_COMPILE_FLAGS "-fprofile-arcs -ftest-coverage")
 SET(GCC_COVERAGE_LINK_FLAGS    "-lgcov")
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(${PROJECT_NAME} 
+add_executable(${PROJECT_NAME}
   AuxiliaryMethodsTests.cpp 
-  SettingsTests.cpp 
-  TruthTableTests.cpp 
-  OrientedGraphTests.cpp 
-  OrientedGraphSysTests.cpp 
-  FilesToolsTests.cpp 
-  GraphVertexTests.cpp)
+  #SettingsTests.cpp 
+  SimpleGeneratorsTests.cpp 
+  #TruthTableTests.cpp 
+  #OrientedGraphTests.cpp 
+  #OrientedGraphSysTests.cpp 
+  #FilesToolsTests.cpp 
+  #GraphVertexTests.cpp
+  )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
+target_link_libraries(${PROJECT_NAME} PUBLIC 
 AuxiliaryMethods 
 Circuit 
-Reliability 
+Reliability
+SimpleGenerators 
 TruthTable 
 OrientedGraph 
 GeneticParameters

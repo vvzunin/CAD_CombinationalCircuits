@@ -89,6 +89,12 @@ OrientedGraph &OrientedGraph::operator=(OrientedGraph &&other)
     return *this;
 }
 
+bool OrientedGraph::operator== (const OrientedGraph& r) const
+{
+  return std::tie(d_vertices, d_settings, d_adjacencyMatrix)
+  == std::tie(r.d_vertices, r.d_settings, r.d_adjacencyMatrix);
+}
+
 size_t OrientedGraph::fullSize() {
     size_t graphSize = 0;
 

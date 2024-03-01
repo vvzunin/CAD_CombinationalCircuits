@@ -20,6 +20,8 @@ public:
     OrientedGraph &operator=(OrientedGraph &&other);
 
     ~OrientedGraph() = default;
+    //from branch Generators
+    bool operator== (const OrientedGraph& r) const;
 
     std::vector<GraphVertex> getVertices() const;
     const std::vector<GraphVertex> &getVerticesReference() const;
