@@ -28,6 +28,7 @@ public:
     void setOperation(const std::string &i_operation);
     std::string getWireName() const;
     bool wrongVertex = false;
+    bool operator== (const GraphVertex& r) const;
 
 private:
     std::string d_logicExpression = "";
