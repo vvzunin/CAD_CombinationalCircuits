@@ -8,7 +8,7 @@
     - [Backend + frontend](#backend_frontend_rus)
         - [Установка](#install_rus)
         - [Запуск](#run_rus)
-    -
+    
 
 # Сборка и запуск компонентов
 <a name="build_rus"></a> 
