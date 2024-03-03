@@ -73,3 +73,27 @@ GraphVertexBase* OrientedGraph::addInput(const std::string i_name = "") {
   GraphVertexBase* newVertex = new GraphVertexInput(this, i_name);
   d_vertexes[VertexTypes::input].push_back(newVertex);
 }
+
+
+bool OrientedGraph::isConnected() const {
+    std::unordered_set<GraphVertexBase*> passed;
+    std::queue<GraphVertexBase*> vertex_queue;
+
+    vertex_queue.push(d_vertexes[0]);
+    passed.insert(d_vertexes[0]);
+
+    while (!vertex_queue.empty()) {
+        GraphVertexBase* current_vertex = vertex_queue.front();
+        auto out_connections = current_vertex->getOutConnections();
+
+        for (GraphVertexBase* out_edge : out_connections) {
+            if (passed.find(out_edge) == passed.end()) {
+                passed.push(out_edge);
+                vertex_queue.push(out_edge);
+            }
+        }
+        vertex_queue.pop();
+    };
+
+    return passed.size() == this->fullSize();
+}

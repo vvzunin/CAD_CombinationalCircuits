@@ -25,6 +25,9 @@ public:
   bool isEmpty() const;
   // Имеются ли в схеме какие-либо vertex
   bool isEmptyFull() const;
+
+  // Проверяет, связный ли граф
+  bool isConnected() const;
   
   virtual void updateLevel();
   int getMaxLevel();

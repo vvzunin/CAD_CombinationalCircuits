@@ -37,6 +37,10 @@ public:
   void setBaseGraph(OrientedGraph* const i_baseGraph);
   OrientedGraph* setBaseGraph() const;
 
+  // чтобы у OrientedGraph был доступ к переменной, в которой хранятся исходящие edges
+  std::vector<GraphVertexBase*>& getOutConnections() const; // Убрать
+
+
 
 protected:
 

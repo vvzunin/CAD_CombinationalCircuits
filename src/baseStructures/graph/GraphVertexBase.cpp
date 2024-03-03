@@ -81,3 +81,7 @@ void GraphVertexBase::setBaseGraph(OrientedGraph* const i_baseGraph) {
 OrientedGraph* GraphVertexBase::setBaseGraph() const {
   return d_baseGraph;
 }
+
+std::vector<GraphVertexBase*>& GraphVertexBase::getOutConnections() const {
+    return d_outConnections;
+}
