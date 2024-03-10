@@ -1125,7 +1125,7 @@ OrientedGraph SimpleGenerators::generatorDemultiplexer(int i_bits)
     //u - переменная для чтения одного символа из строки F[i]
     
     OrientedGraph graph;
-    graph.addVertex("f","input");
+    graph.addVertex("x_f","input");
 
     int k = 0;
     for (int t = 0; t <= i_bits; t++) {
@@ -1168,14 +1168,14 @@ OrientedGraph SimpleGenerators::generatorDemultiplexer(int i_bits)
                 K[i] = X[i];
                 X[i] = "";
             }
-            X[i] = K[i] + " and f";
+            X[i] = K[i] + " and x_f";
         }
 
         for (int i = 0; i <= i_bits - 1; i++) {
             if (!X[i].empty())
                 X[i].erase(0, 5);
             graph.addVertex(X[i], "and", X[i]);
-            graph.addEdge("f", X[i], false);
+            graph.addEdge("x_f", X[i], false);
             graph.addEdge(X[i],"x" + Z[i],false);
         }
 
