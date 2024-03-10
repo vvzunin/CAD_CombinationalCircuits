@@ -258,7 +258,7 @@ void DataBaseGenerator::generateDataBaseDecoder(const GenerationParameters &i_pa
 void DataBaseGenerator::generateDataBaseDemultiplexer(const GenerationParameters &i_param)
 {
   SimpleGenerators generator;
-  int i_bits = i_param.getInputs();
+  int i_bits = i_param.getOutputs();
   OrientedGraph graph = generator.generatorDemultiplexer(i_bits);
   Circuit c(graph);
   c.setPath(d_mainPath);

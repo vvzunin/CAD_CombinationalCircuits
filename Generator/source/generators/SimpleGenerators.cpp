@@ -1139,28 +1139,31 @@ OrientedGraph SimpleGenerators::generatorDemultiplexer(int i_bits)
     std::vector<std::string> S(k);
     std::vector<std::string> Z(i_bits);
 
-    if (i_bits > 1) { 
+    if (i_bits > 1) {
         for (int p = 0; p <= k - 1; p++) {
             S[p] = std::to_string(p);
-            graph.addVertex("a" + S[p], "input");
-            graph.addVertex("not a" + S[p], "not", "not a" + S[p]);
+            graph.addVertex("x_a" + S[p], "input");
+            graph.addVertex("not x_a" + S[p], "not", "not x_a" + S[p]);
         }
 
         for (int i = 0; i <= i_bits - 1; i++) {
             Z[i] = std::to_string(i);
             graph.addVertex("x" + Z[i], "output");
-            F[i] = std::bitset<8>(i).to_string();
+            std::string tempString = std::bitset<8>(i).to_string();
+            while (tempString[0] == '0')
+                tempString.erase(0, 1);
+            F[i] = tempString;
             int len = F[i].size();
 
             for (int w = 0; w <= k - 1; w++) {
                 if (F[i].size() < w + 1) 
-                    X[i] = K[i] + " and not a" + S[w];
+                    X[i] = K[i] + " and not x_a" + S[w];
                 else {
                     char u = F[i][len - w - 1];
                     if (u == '1')
-                        X[i] = K[i] + " and a" + S[w];
+                        X[i] = K[i] + " and x_a" + S[w];
                     else
-                        X[i] = K[i] + " and not a" + S[w];
+                        X[i] = K[i] + " and not x_a" + S[w];
                 }
                 K[i] = X[i];
                 X[i] = "";
@@ -1170,31 +1173,27 @@ OrientedGraph SimpleGenerators::generatorDemultiplexer(int i_bits)
 
         for (int i = 0; i <= i_bits - 1; i++) {
             if (!X[i].empty())
-                X[i].erase(0, 4);
+                X[i].erase(0, 5);
             graph.addVertex(X[i], "and", X[i]);
-            graph.addVertex(X[i], "and", "x" + Z[i]);
-            graph.addEdge("f", "x" + Z[i], false);
             graph.addEdge("f", X[i], false);
+            graph.addEdge(X[i],"x" + Z[i],false);
         }
 
         for (int i = 0; i <= i_bits - 1; i++) {
             int len = F[i].size();
             for (int w = 0; w <= k - 1; w++) {
                 if (F[i].size() < w + 1) {
-                    graph.addEdge(" a" + S[w], "not a" + S[w], false);
-                    graph.addEdge("not a" + S[w], X[i], false);
-                    graph.addEdge("not a" + S[w], "x" + Z[i], false);
+                    graph.addEdge("x_a" + S[w], "not x_a" + S[w], false);
+                    graph.addEdge("not x_a" + S[w], X[i], false);
                 }
                 else {
                     char u = F[i][len - w - 1];
                     if (u == '1') {
-                        graph.addEdge("a" + S[w], X[i], false);
-                        graph.addEdge("a" + S[w], "x" + Z[i], false);
+                        graph.addEdge("x_a" + S[w], X[i], false);
                     }
                     else {
-                        graph.addEdge(" a" + S[w], "not a" + S[w], false);
-                        graph.addEdge("not a" + S[w], X[i], false);
-                        graph.addEdge("not a" + S[w], "x" + Z[i], false);
+                        graph.addEdge("x_a" + S[w], "not x_a" + S[w], false);
+                        graph.addEdge("not x_a" + S[w], X[i], false);
                     }
                 }
             }
