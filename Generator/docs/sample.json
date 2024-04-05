@@ -10,7 +10,6 @@
     "repeat_n": 1,
     "CNFF": false,
     "CNFT": true,
-    "Zhegalkin": true,
     "calculate_stats_abc": true,
     "make_optimized_files": true,
     "library_name": "sky130",

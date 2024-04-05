@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set (SOURCES
-  generators/Genetic/Mutations/MutationParameters.cpp
+  MutationParameters.cpp
+  Mutation.cpp
+  MutationTruthTable.cpp
 )
 
-add_library(MutationParameters MutationParameters.cpp MutationParameters.h)
+add_library(MutationParameters SHARED ${SOURCES})

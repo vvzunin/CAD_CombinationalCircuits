@@ -8,7 +8,6 @@ class SimpleGenerators
 public:
   SimpleGenerators();
   std::vector<std::string> cnfFromTruthTable(const TruthTable& i_table, bool i_tp = true);
-  std::vector<std::string> zhegalkinFromTruthTable(const TruthTable& i_table);
   OrientedGraph generatorRandLevel(int i_maxLevel, int i_maxElements, int i_inputs, int i_outputs);
   OrientedGraph generatorNumOperation(
     int i_input,
@@ -23,13 +22,8 @@ public:
   OrientedGraph generatorMultiplexer(int i_bits, std::string T = "0");
   OrientedGraph generatorParity(int i_bits);
   OrientedGraph generatorDecoder(int i_bits);
-  OrientedGraph generatorDemultiplexer(int i_bits);
-  OrientedGraph generatorALU (int i_bits, int i_outbits, bool ALL, bool SUM, bool SUB, bool NSUM, bool NSUB, bool MULT,
-                              bool COM, bool AND, bool NAND, bool OR, bool NOR, bool XOR, bool XNOR, bool CNF);
 private:
   Settings* d_settings = Settings::getInstance("GraphVertex");
   std::map<std::string, int> delNull(std::map<std::string, int> i_copyLogicOper);
   std::string randomGenerator(const std::map<std::string, int>& i_map);
-  OrientedGraph ALU(int i_bits, int i_outbits, bool ALL, bool SUM, bool SUB, bool NSUM, bool NSUB, bool MULT,
-                    bool COM, bool AND, bool NAND, bool OR, bool NOR, bool XOR, bool XNOR, bool CNF);
 };

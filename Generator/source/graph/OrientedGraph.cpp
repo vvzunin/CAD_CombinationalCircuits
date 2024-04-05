@@ -295,7 +295,7 @@ bool OrientedGraph::Substitute(const std::string &vertexNew, const std::string &
     if (v1 != -1 && v2 != -1){
         for (int i = 0; i < d_vertices.size(); i++)
             if (i != v2)
-                d_adjacencyMatrix[v2][i] = d_adjacencyMatrix[v2][i] | d_adjacencyMatrix[v1][i];;
+                d_adjacencyMatrix[v2][i] = d_adjacencyMatrix[v2][i] | d_adjacencyMatrix[v1][i];
         for (int i = 0; i < d_vertices.size(); i++)
             if (i != v2)
                 d_adjacencyMatrix[i][v2] = d_adjacencyMatrix[i][v2] | d_adjacencyMatrix[i][v1];

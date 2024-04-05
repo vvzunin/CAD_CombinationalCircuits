@@ -1,6 +1,7 @@
 #include <random>
 #include <vector>
 #include <ctime>
+#include <iostream>
 
 #include "TruthTable.h"
 
@@ -64,11 +65,17 @@ TruthTable::TruthTable(int i_input, int i_output, const std::vector<std::vector<
     d_array = i_array;
 }
 
-TruthTable::TruthTable(const TruthTable& i_tt, std::vector<std::vector<bool>> i_array) :
-  d_input(i_tt.d_input),
-  d_output(i_tt.d_output)
+TruthTable::TruthTable(const TruthTable& i_tt, std::vector<std::vector<bool>> i_array)
 {
-  d_size = 1u << d_input; // what?
+  d_input = i_tt.d_input;
+  d_output = i_tt.d_output;
+  d_size = i_tt.d_size;
+  if (i_array.empty() || i_array.size() != d_size || i_array[0].size() != d_output){
+    generateRandom( TruthTableParameters(d_input, d_output));
+  }
+  else{
+    d_array = i_array;
+  }
 }
 
 TruthTable::TruthTable(int i_input, int i_output, double i_p) :
@@ -131,6 +138,23 @@ void TruthTable::generateTable(double i_p)
       for (int j = 0; j < d_output; ++j)
         d_array[i][j] = distribution(generator) < i_p;
     }
+  }
+}
+
+void TruthTable::printTable() const
+{
+  if (d_array.empty())
+  {
+    std::cout << "Пустой массив";
+  }
+  for (const std::vector<bool>& inner_vec : d_array)
+  {
+    std::cout << "(";
+    for (bool val : inner_vec)
+    {
+      std::cout << val << ";";
+    }
+    std::cout << ")" << std::endl;
   }
 }
 

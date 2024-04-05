@@ -1,3 +1,6 @@
+#pragma once
+
+
 #include <random>
 #include <algorithm>
 #include <vector>
@@ -5,6 +8,8 @@
 
 #include "MutationTruthTable.h"
 
+namespace MutationTruthTable
+{
 std::vector<std::vector<bool>> MutationTable(std::vector<std::vector<bool>> i_table,
                                             double i_probability)
 {
@@ -208,4 +213,6 @@ std::vector<ChronosomeType<TruthTable, TruthTableParameters>> MutationDelete(
     }
   }
   return i_population;
+}
+//namespace end
 }

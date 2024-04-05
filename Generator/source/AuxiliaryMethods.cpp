@@ -2,12 +2,12 @@
 #include <iostream>
 #include <cassert>
 #include <string_view>
-
+#include <random>
+#include <unordered_set>
 
 #include "AuxiliaryMethods.h"
 
-namespace
-{
+
   int getRandInt(int i_lower, int i_upper)
   {
     assert(i_lower <= i_upper);
@@ -27,7 +27,7 @@ namespace
 
     return tokens;
   }
-}
+
 
 
 std::string AuxMethods::readAllFile(const std::string& filename) {
@@ -42,42 +42,31 @@ std::string AuxMethods::readAllFile(const std::string& filename) {
 }
 
 std::vector<int> AuxMethods::getRandomIntList(int i_n, int i_minNumber,
-    int i_maxNumber, bool repite)
+    int i_maxNumber, bool repite = false)
 {
-  std::srand(time(0));
-  std::vector<int> lst;
-  bool flag = true;
-  //TODO: can we just rewrite it to simple while? and withour UB make flag = true before while?
+  std::vector<int> randomNumbers;
+  std::random_device rd; // Получаем случайное число из аппаратного RNG.
+  std::mt19937 gen(rd()); // Инициализируем Mersenne-Twister генератор.
+  std::uniform_int_distribution<> distrib(i_minNumber, i_maxNumber - 1);
 
-  while (flag)
-  {
-    int i;
-    flag = false;
-    int k = i_n - lst.size();
-    for (i = 0; i < k; ++i)
-      lst.push_back(getRandInt(i_minNumber, i_maxNumber));
-
-    sort(lst.begin(), lst.end());
-
-    if (!repite)
-    {
-      i = 1;
-      int insert = 0;
-      while (i < lst.size() - 1)
-      {
-        if (lst[i] != lst[i - 1])
-          lst[insert++] = lst[i];
-        ++i;
-      }
-      if (insert != lst.size())
-      {
-        flag = true;
-        lst.resize(insert);
+  if (repite) {
+    // Если повторения разрешены, просто генерируем числа.
+    for (int i = 0; i < i_n; ++i) {
+            randomNumbers.push_back(distrib(gen));
+    }
+  } 
+  else {
+    // Если повторения запрещены, используем set для проверки существующих чисел.
+    std::unordered_set<int> used;
+    while (randomNumbers.size() < static_cast<size_t>(i_n)) {
+      int number = distrib(gen);
+      // Добавляем только уникальные числа.
+      if (used.insert(number).second) {
+        randomNumbers.push_back(number);
       }
     }
   }
-
-  return lst;
+  return randomNumbers;
 }
 
 

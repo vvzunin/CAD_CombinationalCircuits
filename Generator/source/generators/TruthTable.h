@@ -24,6 +24,15 @@ public:
   std::vector<std::vector<bool>> convToBinary() const;
   void printTable() const;
   bool operator== (const TruthTable& r) const;
+  // TruthTable(const TruthTable& other)
+  //   :d_input( other.d_input )
+  //   , d_output( other.d_output )
+  //   , d_size( other.d_size )
+  //   , d_array( other.d_array )
+  //   , d_settings( Settings::getInstance("TruthTable") )
+  // {
+
+  // }
 
 private:
   int d_input;

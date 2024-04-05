@@ -4,6 +4,8 @@
 #include "../../../AuxiliaryMethods.h"
 #include <ctime>
 
+namespace RecombinationsTruthTable
+{
 std::vector<ChronosomeType<TruthTable, TruthTableParameters>> RecombinationCrossingEachExitInTurnMany
 (
   RecombinationParameters i_recombinationParameters,
@@ -127,7 +129,7 @@ std::vector<ChronosomeType<TruthTable, TruthTableParameters>> RecombinationCross
     TruthTable mask(
       input,
       output,
-      MutationTable(
+      MutationTruthTable::MutationTable(
         i_population[child3].getChronosomeType().getOutTable(),
         i_recombinationParameters.getMaskProbability()
       )
@@ -255,4 +257,6 @@ std::vector<ChronosomeType<TruthTable, TruthTableParameters>> RecombinationCross
     survivors.push_back(tmp);
   }
   return survivors;
+}
+//namespace end
 }
